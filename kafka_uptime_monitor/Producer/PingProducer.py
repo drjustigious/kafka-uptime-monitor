@@ -29,10 +29,10 @@ class PingObservation:
         Format the observation into a dictionary that can be serialized to JSON.
         """
         data = {
-            "observation_time": self.observation_time.strftime(constants.DATE_FORMAT),
-            "response_time": self.response_time.microseconds/1000 if self.response_time is not None else None,
-            "response_status": self.response_status if self.response_status is not None else None,
-            "regex_matched": self.regex_matched if self.regex_matched is not None else None
+            constants.OBSERVATION_TIME: self.observation_time.strftime(constants.DATE_FORMAT),
+            constants.RESPONSE_TIME: self.response_time.microseconds/1000 if self.response_time is not None else None,
+            constants.RESPONSE_STATUS: self.response_status if self.response_status is not None else None,
+            constants.REGEX_MATCHED: self.regex_matched if self.regex_matched is not None else None
         }
         return data
 
@@ -62,8 +62,7 @@ class PingProducer(object):
                 constants.PING_REGEX_PATTERN,
                 constants.LOG_FILENAME_BASE,
                 constants.KAFKA_TOPIC,
-                constants.KAFKA_BOOTSTRAP_URL,
-                constants.KAFKA_GROUP,
+                constants.KAFKA_BOOTSTRAP_URL
             ], converter=None)
         }
 
@@ -85,7 +84,6 @@ class PingProducer(object):
             key: self._config[key]
             for key in [
                 constants.KAFKA_TOPIC,
-                constants.KAFKA_GROUP,
                 constants.PING_TARGET_WEBSITE_URL,
                 constants.PING_REGEX_PATTERN,
                 constants.PING_INTERVAL_SECONDS,
@@ -106,8 +104,7 @@ class PingProducer(object):
     def configure_kafka_producer(self, config: dict) -> KafkaProducer:
         producer = KafkaProducer(
             bootstrap_servers=config[constants.KAFKA_BOOTSTRAP_URL],
-            value_serializer=lambda x: json.dumps(x).encode('utf-8'),
-            group_id=config[constants.KAFKA_GROUP]
+            value_serializer=lambda x: json.dumps(x).encode('utf-8')
         )
         return producer
 

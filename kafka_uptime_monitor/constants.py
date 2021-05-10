@@ -18,7 +18,12 @@ LOGGING_FORMAT = '[%(asctime)s] %(levelname)s %(message)s'
 DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
 CONSUMER_LOGFILE_SUFFIX = "_consumer.log"
 PRODUCER_LOGFILE_SUFFIX = "_producer.log"
+RESPONSE_OK = 200
 
 
 # Python-side keys.
 LOG_FILE_NAME = "LOG_FILE_NAME"
+OBSERVATION_TIME = "observation_time"
+RESPONSE_TIME = "response_time"
+RESPONSE_STATUS = "response_status"
+REGEX_MATCHED = "regex_matched"
