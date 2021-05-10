@@ -3,3 +3,609 @@
 [2021-05-10 19:57:38] DEBUG Producing off the URL https://snakeoil.drjustigious.fi/login/.
 [2021-05-10 19:57:41] DEBUG Producing off the URL https://snakeoil.drjustigious.fi/login/.
 [2021-05-10 19:57:44] DEBUG Producing off the URL https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:46:39] DEBUG Producer: Pinging https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:46:39] DEBUG Starting new HTTPS connection (1): snakeoil.drjustigious.fi:443
+[2021-05-10 20:46:39] DEBUG https://snakeoil.drjustigious.fi:443 "GET /login/ HTTP/1.1" 200 None
+[2021-05-10 20:46:39] DEBUG Producer:  Searching for 'None' in the following text.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snake Oil Webshop</title>
+  <link rel="stylesheet" type="text/css" href="/static/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/static/snakeoil.css" />
+  <script src="/static/jquery.min.js"></script>
+  <script type="text/javascript" src="/static/bootstrap/bootstrap.min.js"></script>
+
+  <!-- Icon definitions and manifest. -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
+  <link rel="manifest" href="/static/site.webmanifest" />
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li >
+        <a href="/"><span class="glyphicon glyphicon-home"></span> Shop</a>
+      </li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li >
+            <a id="shoppingCartNavLink" href="/cart/"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;0 items | 0.00 €&nbsp;</a>
+        </li>
+      
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>&nbsp;<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href=""><span class="glyphicon glyphicon-cog"></span>&nbsp;My account</a></li>
+              <li><a href=""><span class="glyphicon glyphicon-lock"></span>&nbsp;Change password</a></li>
+              
+              <li class="divider"></li>
+              <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Log out</a></li>
+            </ul>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<div class="container">
+  
+  <div class="container" style="max-width: 320px;">
+      <form id="login-form" method="post" action="/login/">
+        <input type="hidden" name="csrfmiddlewaretoken" value="9CwD7blOseN4247wuHweciYeVkTDZ1NZBPExsbtkdUAkdsE1UZX73JuqbffYGS4Z">
+
+        <div class="input-group" style="padding-bottom: 4px;">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input id="id_username" name="username" type="text" placeholder="Username" class="form-control">
+        </div>
+        <div class="input-group" style="padding-bottom: 4px;">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+          <input id="id_password" name="password" type="password" placeholder="Password" class="form-control">
+        </div>
+
+        
+        
+        <div class="input-group" style="margin: auto;">
+          <input type="submit" value="Log in" class="btn btn-primary btn-lg" />
+          <input type="hidden" name="next" value="" />
+        </div>
+      </form>
+  </div>  
+
+</div>
+
+
+<!-- Inject template variables into JavaScript. -->
+<input type="hidden" name="csrfmiddlewaretoken" value="9CwD7blOseN4247wuHweciYeVkTDZ1NZBPExsbtkdUAkdsE1UZX73JuqbffYGS4Z">
+<script type="text/javascript">
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  var webShopUrls = {
+    addToCart: "/cart/add/"
+  };
+</script>
+<!-- Load the project-specific JavaScript resources. -->
+<script type="text/javascript" src="/static/snakeoil.js"></script>
+</body>
+</html>
+
+[2021-05-10 20:48:08] DEBUG Producer: Pinging https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:48:08] DEBUG Starting new HTTPS connection (1): snakeoil.drjustigious.fi:443
+[2021-05-10 20:48:08] DEBUG https://snakeoil.drjustigious.fi:443 "GET /login/ HTTP/1.1" 200 None
+[2021-05-10 20:48:22] DEBUG Producer: Pinging https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:48:22] DEBUG Starting new HTTPS connection (1): snakeoil.drjustigious.fi:443
+[2021-05-10 20:48:22] DEBUG https://snakeoil.drjustigious.fi:443 "GET /login/ HTTP/1.1" 200 None
+[2021-05-10 20:48:22] DEBUG Producer:  Searching for 'Snake Oil Webshop' in the following text.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snake Oil Webshop</title>
+  <link rel="stylesheet" type="text/css" href="/static/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/static/snakeoil.css" />
+  <script src="/static/jquery.min.js"></script>
+  <script type="text/javascript" src="/static/bootstrap/bootstrap.min.js"></script>
+
+  <!-- Icon definitions and manifest. -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
+  <link rel="manifest" href="/static/site.webmanifest" />
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li >
+        <a href="/"><span class="glyphicon glyphicon-home"></span> Shop</a>
+      </li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li >
+            <a id="shoppingCartNavLink" href="/cart/"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;0 items | 0.00 €&nbsp;</a>
+        </li>
+      
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>&nbsp;<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href=""><span class="glyphicon glyphicon-cog"></span>&nbsp;My account</a></li>
+              <li><a href=""><span class="glyphicon glyphicon-lock"></span>&nbsp;Change password</a></li>
+              
+              <li class="divider"></li>
+              <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Log out</a></li>
+            </ul>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<div class="container">
+  
+  <div class="container" style="max-width: 320px;">
+      <form id="login-form" method="post" action="/login/">
+        <input type="hidden" name="csrfmiddlewaretoken" value="yfU4eneL3JIP0zogZ0Q5Kca8a4QGyCk8322O24HHUaAL83J7zrWuRihaUONmA61k">
+
+        <div class="input-group" style="padding-bottom: 4px;">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input id="id_username" name="username" type="text" placeholder="Username" class="form-control">
+        </div>
+        <div class="input-group" style="padding-bottom: 4px;">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+          <input id="id_password" name="password" type="password" placeholder="Password" class="form-control">
+        </div>
+
+        
+        
+        <div class="input-group" style="margin: auto;">
+          <input type="submit" value="Log in" class="btn btn-primary btn-lg" />
+          <input type="hidden" name="next" value="" />
+        </div>
+      </form>
+  </div>  
+
+</div>
+
+
+<!-- Inject template variables into JavaScript. -->
+<input type="hidden" name="csrfmiddlewaretoken" value="yfU4eneL3JIP0zogZ0Q5Kca8a4QGyCk8322O24HHUaAL83J7zrWuRihaUONmA61k">
+<script type="text/javascript">
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  var webShopUrls = {
+    addToCart: "/cart/add/"
+  };
+</script>
+<!-- Load the project-specific JavaScript resources. -->
+<script type="text/javascript" src="/static/snakeoil.js"></script>
+</body>
+</html>
+
+[2021-05-10 20:48:22] DEBUG Producer: Would publish the following observation.
+[2021-05-10 17:48:22.911547] Status 200 in 0:00:00.286142 ms (regex True)
+[2021-05-10 20:48:25] DEBUG Producer: Pinging https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:48:25] DEBUG Starting new HTTPS connection (1): snakeoil.drjustigious.fi:443
+[2021-05-10 20:48:26] DEBUG https://snakeoil.drjustigious.fi:443 "GET /login/ HTTP/1.1" 200 None
+[2021-05-10 20:48:26] DEBUG Producer:  Searching for 'Snake Oil Webshop' in the following text.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snake Oil Webshop</title>
+  <link rel="stylesheet" type="text/css" href="/static/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/static/snakeoil.css" />
+  <script src="/static/jquery.min.js"></script>
+  <script type="text/javascript" src="/static/bootstrap/bootstrap.min.js"></script>
+
+  <!-- Icon definitions and manifest. -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
+  <link rel="manifest" href="/static/site.webmanifest" />
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li >
+        <a href="/"><span class="glyphicon glyphicon-home"></span> Shop</a>
+      </li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li >
+            <a id="shoppingCartNavLink" href="/cart/"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;0 items | 0.00 €&nbsp;</a>
+        </li>
+      
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>&nbsp;<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href=""><span class="glyphicon glyphicon-cog"></span>&nbsp;My account</a></li>
+              <li><a href=""><span class="glyphicon glyphicon-lock"></span>&nbsp;Change password</a></li>
+              
+              <li class="divider"></li>
+              <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Log out</a></li>
+            </ul>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<div class="container">
+  
+  <div class="container" style="max-width: 320px;">
+      <form id="login-form" method="post" action="/login/">
+        <input type="hidden" name="csrfmiddlewaretoken" value="kzkl3EDZrSSHtSGVmBMaEbKMukh1oUWkUwlwQDjBnFdQc5Wct2U8eVnPo2eP6hOa">
+
+        <div class="input-group" style="padding-bottom: 4px;">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input id="id_username" name="username" type="text" placeholder="Username" class="form-control">
+        </div>
+        <div class="input-group" style="padding-bottom: 4px;">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+          <input id="id_password" name="password" type="password" placeholder="Password" class="form-control">
+        </div>
+
+        
+        
+        <div class="input-group" style="margin: auto;">
+          <input type="submit" value="Log in" class="btn btn-primary btn-lg" />
+          <input type="hidden" name="next" value="" />
+        </div>
+      </form>
+  </div>  
+
+</div>
+
+
+<!-- Inject template variables into JavaScript. -->
+<input type="hidden" name="csrfmiddlewaretoken" value="kzkl3EDZrSSHtSGVmBMaEbKMukh1oUWkUwlwQDjBnFdQc5Wct2U8eVnPo2eP6hOa">
+<script type="text/javascript">
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  var webShopUrls = {
+    addToCart: "/cart/add/"
+  };
+</script>
+<!-- Load the project-specific JavaScript resources. -->
+<script type="text/javascript" src="/static/snakeoil.js"></script>
+</body>
+</html>
+
+[2021-05-10 20:48:26] DEBUG Producer: Would publish the following observation.
+[2021-05-10 17:48:26.178348] Status 200 in 0:00:00.255374 ms (regex True)
+[2021-05-10 20:48:29] DEBUG Producer: Pinging https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:48:29] DEBUG Starting new HTTPS connection (1): snakeoil.drjustigious.fi:443
+[2021-05-10 20:48:29] DEBUG https://snakeoil.drjustigious.fi:443 "GET /login/ HTTP/1.1" 200 None
+[2021-05-10 20:48:29] DEBUG Producer:  Searching for 'Snake Oil Webshop' in the following text.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snake Oil Webshop</title>
+  <link rel="stylesheet" type="text/css" href="/static/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/static/snakeoil.css" />
+  <script src="/static/jquery.min.js"></script>
+  <script type="text/javascript" src="/static/bootstrap/bootstrap.min.js"></script>
+
+  <!-- Icon definitions and manifest. -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
+  <link rel="manifest" href="/static/site.webmanifest" />
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li >
+        <a href="/"><span class="glyphicon glyphicon-home"></span> Shop</a>
+      </li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li >
+            <a id="shoppingCartNavLink" href="/cart/"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;0 items | 0.00 €&nbsp;</a>
+        </li>
+      
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>&nbsp;<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href=""><span class="glyphicon glyphicon-cog"></span>&nbsp;My account</a></li>
+              <li><a href=""><span class="glyphicon glyphicon-lock"></span>&nbsp;Change password</a></li>
+              
+              <li class="divider"></li>
+              <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Log out</a></li>
+            </ul>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<div class="container">
+  
+  <div class="container" style="max-width: 320px;">
+      <form id="login-form" method="post" action="/login/">
+        <input type="hidden" name="csrfmiddlewaretoken" value="1N0U2zkwsOQy2VlB5LwFYcrPx96RfBJYTitDY1UiKkjjLkpOec5RZlhAqGQvIJBC">
+
+        <div class="input-group" style="padding-bottom: 4px;">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input id="id_username" name="username" type="text" placeholder="Username" class="form-control">
+        </div>
+        <div class="input-group" style="padding-bottom: 4px;">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+          <input id="id_password" name="password" type="password" placeholder="Password" class="form-control">
+        </div>
+
+        
+        
+        <div class="input-group" style="margin: auto;">
+          <input type="submit" value="Log in" class="btn btn-primary btn-lg" />
+          <input type="hidden" name="next" value="" />
+        </div>
+      </form>
+  </div>  
+
+</div>
+
+
+<!-- Inject template variables into JavaScript. -->
+<input type="hidden" name="csrfmiddlewaretoken" value="1N0U2zkwsOQy2VlB5LwFYcrPx96RfBJYTitDY1UiKkjjLkpOec5RZlhAqGQvIJBC">
+<script type="text/javascript">
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  var webShopUrls = {
+    addToCart: "/cart/add/"
+  };
+</script>
+<!-- Load the project-specific JavaScript resources. -->
+<script type="text/javascript" src="/static/snakeoil.js"></script>
+</body>
+</html>
+
+[2021-05-10 20:48:29] DEBUG Producer: Would publish the following observation.
+[2021-05-10 17:48:29.475475] Status 200 in 0:00:00.284526 ms (regex True)
+[2021-05-10 20:48:32] DEBUG Producer: Pinging https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:48:32] DEBUG Starting new HTTPS connection (1): snakeoil.drjustigious.fi:443
+[2021-05-10 20:48:32] DEBUG https://snakeoil.drjustigious.fi:443 "GET /login/ HTTP/1.1" 200 None
+[2021-05-10 20:48:32] DEBUG Producer:  Searching for 'Snake Oil Webshop' in the following text.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snake Oil Webshop</title>
+  <link rel="stylesheet" type="text/css" href="/static/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/static/snakeoil.css" />
+  <script src="/static/jquery.min.js"></script>
+  <script type="text/javascript" src="/static/bootstrap/bootstrap.min.js"></script>
+
+  <!-- Icon definitions and manifest. -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
+  <link rel="manifest" href="/static/site.webmanifest" />
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li >
+        <a href="/"><span class="glyphicon glyphicon-home"></span> Shop</a>
+      </li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li >
+            <a id="shoppingCartNavLink" href="/cart/"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;0 items | 0.00 €&nbsp;</a>
+        </li>
+      
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>&nbsp;<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href=""><span class="glyphicon glyphicon-cog"></span>&nbsp;My account</a></li>
+              <li><a href=""><span class="glyphicon glyphicon-lock"></span>&nbsp;Change password</a></li>
+              
+              <li class="divider"></li>
+              <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Log out</a></li>
+            </ul>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<div class="container">
+  
+  <div class="container" style="max-width: 320px;">
+      <form id="login-form" method="post" action="/login/">
+        <input type="hidden" name="csrfmiddlewaretoken" value="wpJjsqZM4nZiGebRwaMGPG3re3F1952Txy5dzqaTBKfqXaXtDqpLMPOWfBcilXbj">
+
+        <div class="input-group" style="padding-bottom: 4px;">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input id="id_username" name="username" type="text" placeholder="Username" class="form-control">
+        </div>
+        <div class="input-group" style="padding-bottom: 4px;">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+          <input id="id_password" name="password" type="password" placeholder="Password" class="form-control">
+        </div>
+
+        
+        
+        <div class="input-group" style="margin: auto;">
+          <input type="submit" value="Log in" class="btn btn-primary btn-lg" />
+          <input type="hidden" name="next" value="" />
+        </div>
+      </form>
+  </div>  
+
+</div>
+
+
+<!-- Inject template variables into JavaScript. -->
+<input type="hidden" name="csrfmiddlewaretoken" value="wpJjsqZM4nZiGebRwaMGPG3re3F1952Txy5dzqaTBKfqXaXtDqpLMPOWfBcilXbj">
+<script type="text/javascript">
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  var webShopUrls = {
+    addToCart: "/cart/add/"
+  };
+</script>
+<!-- Load the project-specific JavaScript resources. -->
+<script type="text/javascript" src="/static/snakeoil.js"></script>
+</body>
+</html>
+
+[2021-05-10 20:48:32] DEBUG Producer: Would publish the following observation.
+[2021-05-10 17:48:32.709062] Status 200 in 0:00:00.219944 ms (regex True)
+[2021-05-10 20:48:35] DEBUG Producer: Pinging https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:48:35] DEBUG Starting new HTTPS connection (1): snakeoil.drjustigious.fi:443
+[2021-05-10 20:48:35] DEBUG https://snakeoil.drjustigious.fi:443 "GET /login/ HTTP/1.1" 200 None
+[2021-05-10 20:48:36] DEBUG Producer:  Searching for 'Snake Oil Webshop' in the following text.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snake Oil Webshop</title>
+  <link rel="stylesheet" type="text/css" href="/static/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/static/snakeoil.css" />
+  <script src="/static/jquery.min.js"></script>
+  <script type="text/javascript" src="/static/bootstrap/bootstrap.min.js"></script>
+
+  <!-- Icon definitions and manifest. -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
+  <link rel="manifest" href="/static/site.webmanifest" />
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li >
+        <a href="/"><span class="glyphicon glyphicon-home"></span> Shop</a>
+      </li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li >
+            <a id="shoppingCartNavLink" href="/cart/"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;0 items | 0.00 €&nbsp;</a>
+        </li>
+      
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>&nbsp;<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href=""><span class="glyphicon glyphicon-cog"></span>&nbsp;My account</a></li>
+              <li><a href=""><span class="glyphicon glyphicon-lock"></span>&nbsp;Change password</a></li>
+              
+              <li class="divider"></li>
+              <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Log out</a></li>
+            </ul>
+        </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<div class="container">
+  
+  <div class="container" style="max-width: 320px;">
+      <form id="login-form" method="post" action="/login/">
+        <input type="hidden" name="csrfmiddlewaretoken" value="8Qj2AccLEGCBjCKM2cgKNY8I17iSCwqLsQjVYyVELRfQOL9bNAz1S8dcq8FD7Cnb">
+
+        <div class="input-group" style="padding-bottom: 4px;">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input id="id_username" name="username" type="text" placeholder="Username" class="form-control">
+        </div>
+        <div class="input-group" style="padding-bottom: 4px;">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+          <input id="id_password" name="password" type="password" placeholder="Password" class="form-control">
+        </div>
+
+        
+        
+        <div class="input-group" style="margin: auto;">
+          <input type="submit" value="Log in" class="btn btn-primary btn-lg" />
+          <input type="hidden" name="next" value="" />
+        </div>
+      </form>
+  </div>  
+
+</div>
+
+
+<!-- Inject template variables into JavaScript. -->
+<input type="hidden" name="csrfmiddlewaretoken" value="8Qj2AccLEGCBjCKM2cgKNY8I17iSCwqLsQjVYyVELRfQOL9bNAz1S8dcq8FD7Cnb">
+<script type="text/javascript">
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  var webShopUrls = {
+    addToCart: "/cart/add/"
+  };
+</script>
+<!-- Load the project-specific JavaScript resources. -->
+<script type="text/javascript" src="/static/snakeoil.js"></script>
+</body>
+</html>
+
+[2021-05-10 20:48:36] DEBUG Producer: Would publish the following observation.
+[2021-05-10 17:48:36.001475] Status 200 in 0:00:00.279285 ms (regex True)
+[2021-05-10 20:52:58] DEBUG Producer: Pinging https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:52:58] DEBUG Starting new HTTPS connection (1): snakeoil.drjustigious.fi:443
+[2021-05-10 20:52:59] DEBUG https://snakeoil.drjustigious.fi:443 "GET /login/ HTTP/1.1" 200 None
+[2021-05-10 20:52:59] DEBUG Producer: Would publish the following observation.
+{'observation_time': '2021-05-10 17:52:59', 'response_time': 260.614, 'response_status': 200, 'regex_matched': True}
+[2021-05-10 20:53:02] DEBUG Producer: Pinging https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:53:02] DEBUG Starting new HTTPS connection (1): snakeoil.drjustigious.fi:443
+[2021-05-10 20:53:02] DEBUG https://snakeoil.drjustigious.fi:443 "GET /login/ HTTP/1.1" 200 None
+[2021-05-10 20:53:02] DEBUG Producer: Would publish the following observation.
+{'observation_time': '2021-05-10 17:53:02', 'response_time': 261.577, 'response_status': 200, 'regex_matched': True}
+[2021-05-10 20:53:05] DEBUG Producer: Pinging https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:53:05] DEBUG Starting new HTTPS connection (1): snakeoil.drjustigious.fi:443
+[2021-05-10 20:53:05] DEBUG https://snakeoil.drjustigious.fi:443 "GET /login/ HTTP/1.1" 200 None
+[2021-05-10 20:53:05] DEBUG Producer: Would publish the following observation.
+{'observation_time': '2021-05-10 17:53:05', 'response_time': 262.321, 'response_status': 200, 'regex_matched': True}
+[2021-05-10 20:53:08] DEBUG Producer: Pinging https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:53:08] DEBUG Starting new HTTPS connection (1): snakeoil.drjustigious.fi:443
+[2021-05-10 20:53:08] DEBUG https://snakeoil.drjustigious.fi:443 "GET /login/ HTTP/1.1" 200 None
+[2021-05-10 20:53:08] DEBUG Producer: Would publish the following observation.
+{'observation_time': '2021-05-10 17:53:08', 'response_time': 237.442, 'response_status': 200, 'regex_matched': True}
+[2021-05-10 20:53:11] DEBUG Producer: Pinging https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:53:11] DEBUG Starting new HTTPS connection (1): snakeoil.drjustigious.fi:443
+[2021-05-10 20:53:12] DEBUG https://snakeoil.drjustigious.fi:443 "GET /login/ HTTP/1.1" 200 None
+[2021-05-10 20:53:12] DEBUG Producer: Would publish the following observation.
+{'observation_time': '2021-05-10 17:53:12', 'response_time': 263.124, 'response_status': 200, 'regex_matched': True}
+[2021-05-10 20:53:15] DEBUG Producer: Pinging https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:53:15] DEBUG Starting new HTTPS connection (1): snakeoil.drjustigious.fi:443
+[2021-05-10 20:53:15] DEBUG https://snakeoil.drjustigious.fi:443 "GET /login/ HTTP/1.1" 200 None
+[2021-05-10 20:53:15] DEBUG Producer: Would publish the following observation.
+{'observation_time': '2021-05-10 17:53:15', 'response_time': 233.555, 'response_status': 200, 'regex_matched': True}
+[2021-05-10 20:53:18] DEBUG Producer: Pinging https://snakeoil.drjustigious.fi/login/.
+[2021-05-10 20:53:18] DEBUG Starting new HTTPS connection (1): snakeoil.drjustigious.fi:443
+[2021-05-10 20:53:18] DEBUG https://snakeoil.drjustigious.fi:443 "GET /login/ HTTP/1.1" 200 None
+[2021-05-10 20:53:18] DEBUG Producer: Would publish the following observation.
+{'observation_time': '2021-05-10 17:53:18', 'response_time': 258.667, 'response_status': 200, 'regex_matched': True}
