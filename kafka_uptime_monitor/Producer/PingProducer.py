@@ -1,11 +1,14 @@
 import time
+from kafka.consumer import group
 import requests
 import logging
 import datetime
 import re
+import json
 
 from dataclasses import dataclass
 from dotenv import load_dotenv
+from kafka import KafkaProducer
 from kafka_uptime_monitor import constants, utils
 
 
@@ -38,6 +41,10 @@ class PingObservation:
 class PingProducer(object):
 
     def __init__(self):
+        """
+        Load environment variables to configure the producer, set up logging
+        and initialize a Kafka client.
+        """
         # Load the producer's configuration from environment variables.
         load_dotenv()
 
@@ -54,6 +61,9 @@ class PingProducer(object):
                 constants.PING_TARGET_WEBSITE_URL,
                 constants.PING_REGEX_PATTERN,
                 constants.LOG_FILENAME_BASE,
+                constants.KAFKA_TOPIC,
+                constants.KAFKA_BOOTSTRAP_URL,
+                constants.KAFKA_GROUP,
             ], converter=None)
         }
 
@@ -61,24 +71,58 @@ class PingProducer(object):
         self._config[constants.LOG_FILE_NAME] = f"{self._config[constants.LOG_FILENAME_BASE]}{constants.PRODUCER_LOGFILE_SUFFIX}"
         utils.configure_logger(self._config)
 
+        # Hold reference to just one producer client.
+        self._kafka_producer = self.configure_kafka_producer(self._config)
+
 
     def run(self):
         """
         Keep sending GET requests to the monitored website URL
         until somebody tells the process to hang up (e.g. Ctrl+C).
         """
+        # Log the appropriate parameters to signal startup.
+        startup_parameters = {
+            key: self._config[key]
+            for key in [
+                constants.KAFKA_TOPIC,
+                constants.KAFKA_GROUP,
+                constants.PING_TARGET_WEBSITE_URL,
+                constants.PING_REGEX_PATTERN,
+                constants.PING_INTERVAL_SECONDS,
+                constants.PING_TIMEOUT_SECONDS,                
+            ]
+        }
+        logging.warn(f"Producer: Starting up. {json.dumps(startup_parameters, ensure_ascii=False)}")
+
         while True:
             response = self.send_ping()
             observation = self.collect_results(response)
             self.publish_observation(observation)
             time.sleep(self._config[constants.PING_INTERVAL_SECONDS])
 
+        logging.warn("Producer: Exiting.")
+
+
+    def configure_kafka_producer(self, config: dict) -> KafkaProducer:
+        producer = KafkaProducer(
+            bootstrap_servers=config[constants.KAFKA_BOOTSTRAP_URL],
+            value_serializer=lambda x: json.dumps(x).encode('utf-8'),
+            group_id=config[constants.KAFKA_GROUP]
+        )
+        return producer
+
 
     def publish_observation(self, observation: PingObservation):
         """
         Push the given ping observation into the configured Kafka cluster.
         """
-        logging.debug(f"Producer: Would publish the following observation.\n{observation.render_into_dict()}")
+        observation_as_dict = observation.render_into_dict()
+        logging.debug(f"Producer: Publishing the following observation.\n{observation_as_dict}")
+
+        self._kafka_producer.send(
+            self._config[constants.KAFKA_TOPIC],
+            observation_as_dict
+        )
 
 
     def send_ping(self) -> requests.Response:

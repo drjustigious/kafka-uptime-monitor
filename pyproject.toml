@@ -8,6 +8,7 @@ authors = ["Jussi Tikkanen <drjustigious@gmail.com>"]
 python = "^3.8"
 python-dotenv = "^0.17.1"
 requests = "^2.25.1"
+kafka-python = "^2.0.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
