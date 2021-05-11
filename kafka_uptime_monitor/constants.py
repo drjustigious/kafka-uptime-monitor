@@ -36,6 +36,10 @@ PYTHON_TYPES_AS_PSQL_COLUMNS = {
     float: "real",
 }
 
+SSL_CAFILE = "certs/ca.pem"
+SSL_CERTFILE = "certs/service.cert"
+SSL_KEYFILE = "certs/service.key"
+
 
 # Python-side keys.
 LOG_FILE_NAME = "LOG_FILE_NAME"

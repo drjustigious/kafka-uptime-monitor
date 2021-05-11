@@ -47,6 +47,7 @@ class PingConsumer(object):
             **utils.load_from_env([
                 constants.AGGREGATION_SAMPLE_COUNT,
                 constants.LOG_LEVEL,
+                constants.USE_SSL,
             ], converter=int),
 
             # String parameters.
@@ -78,11 +79,14 @@ class PingConsumer(object):
         self._message_queue = []
 
 
-
-    def run(self):
+    def run(self, quit_after_num_messages=None):
         """
         Keep checking for messages on the Kafka cluster
         until somebody tells the process to hang up (e.g. Ctrl+C).
+
+        Passing an integer to 'quit_after_num_messages' will cause
+        the consumer to shut down after processing the given number
+        of messages. Useful for testing.
         """
 
         # Log the appropriate parameters to signal startup.
@@ -94,23 +98,46 @@ class PingConsumer(object):
             ]
         }
         logging.warn(f"Consumer: Starting up. {json.dumps(startup_parameters, ensure_ascii=False)}")
-
+        num_messages_processed = 0
         for message in self._kafka_consumer:
             # This loop will continue as long as the Kafka connection is alive.
             self.collect_message(message.value)
+            num_messages_processed += 1
+            if quit_after_num_messages is not None and num_messages_processed >= quit_after_num_messages:
+                break
 
         logging.warn(f"Consumer: Exiting.")
 
 
     def configure_kafka_consumer(self, config):
-        consumer = KafkaConsumer(
-            config[constants.KAFKA_TOPIC],
-            bootstrap_servers=[config[constants.KAFKA_BOOTSTRAP_URL]],
-            auto_offset_reset='latest',
-            enable_auto_commit=True,
-            group_id=config[constants.KAFKA_GROUP],
-            value_deserializer=lambda x: json.loads(x.decode('utf-8'))      
-        )
+        if config[constants.USE_SSL]:
+            logging.warn("Configuring Kafka consumer to use SSL. Looking for the following files: {}, {}, {}".format(
+                constants.SSL_CAFILE,
+                constants.SSL_CERTFILE,
+                constants.SSL_KEYFILE
+            ))            
+            consumer = KafkaConsumer(
+                config[constants.KAFKA_TOPIC],
+                bootstrap_servers=[config[constants.KAFKA_BOOTSTRAP_URL]],
+                auto_offset_reset='latest',
+                enable_auto_commit=True,
+                group_id=config[constants.KAFKA_GROUP],
+                value_deserializer=lambda x: json.loads(x.decode('utf-8'))    ,
+                security_protocol="SSL",
+                ssl_cafile=constants.SSL_CAFILE,
+                ssl_certfile=constants.SSL_CERTFILE,
+                ssl_keyfile=constants.SSL_KEYFILE,                     
+            )
+        else:
+            consumer = KafkaConsumer(
+                config[constants.KAFKA_TOPIC],
+                bootstrap_servers=[config[constants.KAFKA_BOOTSTRAP_URL]],
+                auto_offset_reset='latest',
+                enable_auto_commit=True,
+                group_id=config[constants.KAFKA_GROUP],
+                value_deserializer=lambda x: json.loads(x.decode('utf-8'))      
+            )
+
         return consumer
 
 

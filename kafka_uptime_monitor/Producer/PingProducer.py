@@ -54,6 +54,7 @@ class PingProducer(object):
                 constants.PING_INTERVAL_SECONDS,
                 constants.PING_TIMEOUT_SECONDS,
                 constants.LOG_LEVEL,
+                constants.USE_SSL,
             ], converter=int),
 
             # String parameters.
@@ -74,10 +75,14 @@ class PingProducer(object):
         self._kafka_producer = self.configure_kafka_producer(self._config)
 
 
-    def run(self):
+    def run(self, quit_after_num_messages=None):
         """
         Keep sending GET requests to the monitored website URL
         until somebody tells the process to hang up (e.g. Ctrl+C).
+
+        Passing an integer to 'quit_after_num_messages' will cause
+        the producer to shut down after processing the given number
+        of messages. Useful for testing.
         """
         # Log the appropriate parameters to signal startup.
         startup_parameters = {
@@ -92,20 +97,41 @@ class PingProducer(object):
         }
         logging.warn(f"Producer: Starting up. {json.dumps(startup_parameters, ensure_ascii=False)}")
 
+        num_messages_processed = 0
         while True:
             response = self.send_ping()
             observation = self.collect_results(response)
             self.publish_observation(observation)
+
+            num_messages_processed += 1
+            if quit_after_num_messages is not None and num_messages_processed >= quit_after_num_messages:
+                break
+
             time.sleep(self._config[constants.PING_INTERVAL_SECONDS])
 
         logging.warn("Producer: Exiting.")
 
 
     def configure_kafka_producer(self, config: dict) -> KafkaProducer:
-        producer = KafkaProducer(
-            bootstrap_servers=config[constants.KAFKA_BOOTSTRAP_URL],
-            value_serializer=lambda x: json.dumps(x).encode('utf-8')
-        )
+        if config[constants.USE_SSL]:
+            logging.warn("Configuring Kafka producer to use SSL. Looking for the following files: {}, {}, {}".format(
+                constants.SSL_CAFILE,
+                constants.SSL_CERTFILE,
+                constants.SSL_KEYFILE
+            ))
+            producer = KafkaProducer(
+                bootstrap_servers=config[constants.KAFKA_BOOTSTRAP_URL],
+                value_serializer=lambda x: json.dumps(x).encode('utf-8'),
+                security_protocol="SSL",
+                ssl_cafile=constants.SSL_CAFILE,
+                ssl_certfile=constants.SSL_CERTFILE,
+                ssl_keyfile=constants.SSL_KEYFILE,                
+            )
+        else:
+            producer = KafkaProducer(
+                bootstrap_servers=config[constants.KAFKA_BOOTSTRAP_URL],
+                value_serializer=lambda x: json.dumps(x).encode('utf-8')
+            )
         return producer
 
 
