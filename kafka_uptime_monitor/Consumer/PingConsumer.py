@@ -2,11 +2,13 @@ import logging
 import json
 import datetime
 import statistics
+import psycopg2
 
 from kafka import KafkaConsumer
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 from dotenv import load_dotenv
 from kafka_uptime_monitor import constants, utils
+from kafka_uptime_monitor.Consumer import sql
 
 
 
@@ -52,7 +54,14 @@ class PingConsumer(object):
                 constants.KAFKA_TOPIC,
                 constants.KAFKA_GROUP,
                 constants.KAFKA_BOOTSTRAP_URL,
+
                 constants.LOG_FILENAME_BASE,
+
+                constants.PSQL_HOST,
+                constants.PSQL_USERNAME,
+                constants.PSQL_PASSWORD,
+                constants.PSQL_DATABASE_NAME,
+                constants.PSQL_PORT
             ], converter=None)
         }
 
@@ -75,6 +84,7 @@ class PingConsumer(object):
         Keep checking for messages on the Kafka cluster
         until somebody tells the process to hang up (e.g. Ctrl+C).
         """
+
         # Log the appropriate parameters to signal startup.
         startup_parameters = {
             key: self._config[key]
@@ -187,3 +197,64 @@ class PingConsumer(object):
             return
 
         logging.info(f"Consumer: Persisting aggregation results. {aggregate}")
+        self.ensure_db_schema_exists()
+        self.write_aggregate_to_database(aggregate)
+
+
+    def ensure_db_schema_exists(self):
+        """
+        Check that the necessary PSQL table(s) exist for persisting the
+        aggregated uptime data.
+        """
+        with self.get_psql_connection() as conn:
+            with conn.cursor() as cur:
+                columns = []
+                for field in fields(ObservationAggregate):
+                    column_type_string = constants.PYTHON_TYPES_AS_PSQL_COLUMNS.get(field.type)
+                    logging.warn(f"column_type_string: {column_type_string}")
+                    column_string = f"{field.name} {column_type_string}"
+                    columns.append(column_string)
+
+                cur.execute(sql.create_table(
+                    self._config[constants.PSQL_AGGREGATE_TABLE_NAME],
+                    columns
+                ))
+
+                conn.commit()
+
+
+    def write_aggregate_to_database(self, aggregate):
+        """
+        Write a database row describing the given aggregate.
+        """
+        with self.get_psql_connection() as conn:
+            with conn.cursor() as cur:
+                column_value_pairs = []
+                for field in fields(aggregate):
+                    field_name = field.name
+                    field_value = getattr(aggregate, field.name)
+                    print(f"field_name: {field_name}")
+                    print(f"field_value: {field_value}")
+                    column_value_pairs.append((field_name, field_value))
+
+                sql_template_string, values = sql.update(
+                    self._config[constants.PSQL_AGGREGATE_TABLE_NAME],
+                    column_value_pairs
+                )
+                cur.execute(sql_template_string, values)                    
+                conn.commit()
+
+
+    def get_psql_connection(self):
+        """
+        Initializes and returns a PSQL connection object.
+        """
+        conn = psycopg2.connect(
+            dbname      = self._config[constants.PSQL_DATABASE_NAME],
+            user        = self._config[constants.PSQL_USERNAME],
+            password    = self._config[constants.PSQL_PASSWORD],
+            host        = self._config[constants.PSQL_HOST],
+            port        = self._config[constants.PSQL_PORT],
+        )
+
+        return conn
