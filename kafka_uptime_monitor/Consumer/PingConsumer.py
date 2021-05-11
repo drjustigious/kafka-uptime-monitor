@@ -62,7 +62,8 @@ class PingConsumer(object):
                 constants.PSQL_USERNAME,
                 constants.PSQL_PASSWORD,
                 constants.PSQL_DATABASE_NAME,
-                constants.PSQL_PORT
+                constants.PSQL_PORT,
+                constants.PSQL_AGGREGATE_TABLE_NAME
             ], converter=None)
         }
 
@@ -146,7 +147,7 @@ class PingConsumer(object):
         Add the received message into the analysis/aggregation queue.
         Also check whether we should already dump the queue into PSQL.
         """
-        logging.info(f"Consumer: Collected message. {message}")
+        logging.debug(f"Consumer: Collected message. {message}")
         self._message_queue.append(message)
         aggregate = self.analyze_message_queue()
         self.persist_aggregate(aggregate)
@@ -238,7 +239,6 @@ class PingConsumer(object):
                 columns = []
                 for field in fields(ObservationAggregate):
                     column_type_string = constants.PYTHON_TYPES_AS_PSQL_COLUMNS.get(field.type)
-                    logging.warn(f"column_type_string: {column_type_string}")
                     column_string = f"{field.name} {column_type_string}"
                     columns.append(column_string)
 
@@ -260,8 +260,6 @@ class PingConsumer(object):
                 for field in fields(aggregate):
                     field_name = field.name
                     field_value = getattr(aggregate, field.name)
-                    print(f"field_name: {field_name}")
-                    print(f"field_value: {field_value}")
                     column_value_pairs.append((field_name, field_value))
 
                 sql_template_string, values = sql.update(

@@ -28,13 +28,10 @@ def update(table_name, column_value_pairs):
         columns.append(pair[0])
         values.append(pair[1])
 
-    print(f"columns:\n{columns}")
-    print(f"values:\n{values}")
-
     columns_string = ", ".join(columns)
     s_values = len(values)*["%s"]
     values_string = ", ".join(s_values)
-    print(f"values_string: {values_string}")
+
     sql = "INSERT INTO {} ({}) VALUES ({})".format(
         table_name,
         columns_string,

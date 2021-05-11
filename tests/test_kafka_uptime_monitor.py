@@ -1,4 +1,7 @@
 import logging
+import time
+
+from dotenv import load_dotenv
 from kafka_uptime_monitor import __version__, utils, constants
 from kafka_uptime_monitor.Producer.PingProducer import PingProducer
 from kafka_uptime_monitor.Consumer.PingConsumer import PingConsumer
@@ -11,6 +14,7 @@ def test_version():
 
 def test_required_environment_variables_set():
     print("Testing required environment variables are set.")
+    load_dotenv("kafka_uptime_monitor/.env")
 
     config = {
         # Integer parameters.
@@ -51,6 +55,8 @@ def test_required_environment_variables_set():
         ], converter=None)
     }
 
+    config[constants.LOG_FILE_NAME] = "__tests__.log"
+
     return config
 
 
@@ -62,12 +68,14 @@ def test_logger_can_write(config: dict):
 
 def test_producer_can_run(num_messages: int):
     print(f"Test-running Kafka producer for {num_messages} messages.")
-    PingConsumer().run(quit_after_num_messages=num_messages)
+    time.sleep(2)
+    PingProducer().run(quit_after_num_messages=num_messages)
 
 
 def test_consumer_can_run(num_messages: int):
-    print(f"Test-running Kafka consumer for {num_messages} messages.")    
-    PingProducer().run(quit_after_num_messages=num_messages)
+    print(f"Test-running Kafka consumer for {num_messages} messages.")
+    time.sleep(2)
+    PingConsumer().run(quit_after_num_messages=num_messages)
 
 
 def run_tests():

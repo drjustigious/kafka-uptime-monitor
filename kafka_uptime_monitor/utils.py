@@ -46,9 +46,12 @@ def load_from_env(keys: list, converter: callable = None) -> dict:
     if converter is None:
         converter = lambda x: x
 
-    converted_config = {
-        key: converter(os.getenv(key))
-        for key in keys
-    }
+    converted_config = {}
+    for key in keys:
+        try:
+            converted_config[key] = converter(os.getenv(key))
+        except TypeError as e:
+            print(f"Error loading environment variable '{key}'. {e}.")
+            raise e
 
     return converted_config

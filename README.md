@@ -12,11 +12,11 @@ This project uses *Poetry* to manage dependencies.
 
 > https://python-poetry.org/
 
-To set the project up in a fresh virtual Python environment, `cd` to the directory where you find this README.md after cloning the project from GitHub and run the following (assuming you're on Ubuntu 20.04 or a compatible OS):
+To set the project up after a fresh git clone, `cd` to the directory where you find this README.md. There you will also find an executable configuration script called `configure.sh`. Running that script will accomplish the following setup steps:
+- Create a virtual Python environment for the project if one does not exist yet.
+- Install dependencies using Poetry.
+- Set up an .env file to store your connection secrets (your default editor will open for editing the .env).
+- Run the test suite.
+- Print usage instructions.
 
-```
-python3 -m venv venv
-source venv/bin/activate
-pip install poetry
-poetry install
-```
+It is safe to run `configure.sh` multiple times e.g. if you need to adjust the .env settings. The script should be essentially idempotent.
